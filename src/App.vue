@@ -9,25 +9,25 @@ const audioOtherUrl = ref('http://localhost:5077/audio/other')
 const audioBassUrl = ref('http://localhost:5077/audio/bass')
 const audioDrumsUrl = ref('http://localhost:5077/audio/drums')
 
-const video = ref(null);
-const vocals = ref(null);
-const other = ref(null);
-const bass = ref(null);
-const drums = ref(null);
+const video = ref<HTMLVideoElement | null>(null);
+const vocals = ref<HTMLVideoElement | null>(null);
+const other = ref<HTMLVideoElement | null>(null);
+const bass = ref<HTMLVideoElement | null>(null);
+const drums = ref<HTMLVideoElement | null>(null);
 const isMuted = ref(false);
 const playAll = () => {
-  video.value.play();
-  vocals.value.play();
-  other.value.play();
-  bass.value.play();
-  drums.value.play();
+  video.value?.play();
+  vocals.value?.play();
+  other.value?.play();
+  bass.value?.play();
+  drums.value?.play();
 }
 const stopAll = () => {
-  video.value.pause();
-  vocals.value.pause();
-  other.value.pause();
-  bass.value.pause();
-  drums.value.pause();
+  video.value?.pause();
+  vocals.value?.pause();
+  other.value?.pause();
+  bass.value?.pause();
+  drums.value?.pause();
 }
 const mutedVocals = () => {
   isMuted.value = !isMuted.value;
