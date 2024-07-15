@@ -1,6 +1,37 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+
+const videoUrl = ref('http://localhost:5077/video')
+const audioVocalsUrl = ref('http://localhost:5077/audio/vocals')
+const audioOtherUrl = ref('http://localhost:5077/audio/other')
+const audioBassUrl = ref('http://localhost:5077/audio/bass')
+const audioDrumsUrl = ref('http://localhost:5077/audio/drums')
+
+const video = ref(null);
+const vocals = ref(null);
+const other = ref(null);
+const bass = ref(null);
+const drums = ref(null);
+const isMuted = ref(false);
+const playAll = () => {
+  video.value.play();
+  vocals.value.play();
+  other.value.play();
+  bass.value.play();
+  drums.value.play();
+}
+const stopAll = () => {
+  video.value.pause();
+  vocals.value.pause();
+  other.value.pause();
+  bass.value.pause();
+  drums.value.pause();
+}
+const mutedVocals = () => {
+  isMuted.value = !isMuted.value;
+}
 </script>
 
 <template>
@@ -15,6 +46,57 @@ import TheWelcome from './components/TheWelcome.vue'
   <main>
     <TheWelcome />
   </main>
+
+  <div>
+    <button @click="playAll">Play All</button>
+  </div>
+
+  <div>
+    <button @click="stopAll">Stop</button>
+  </div>
+
+  <div>
+    <button @click="mutedVocals">
+      <span v-if="isMuted">Unmute Vocals</span>
+      <span v-else>Mute Vocals</span>
+    </button>
+  </div>
+
+  <div>
+    <video ref="video" controls>
+      <source :src="videoUrl" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+  <div>
+    <audio ref="vocals" :muted="isMuted" controls>
+      <source :src="audioVocalsUrl" type="audio/flac">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <div>
+    <audio ref="other" controls>
+      <source :src="audioVocalsUrl" type="audio/flac">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <div>
+    <audio ref="bass" controls>
+      <source :src="audioVocalsUrl" type="audio/flac">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <div>
+    <audio ref="drums" controls>
+      <source :src="audioVocalsUrl" type="audio/flac">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
 </template>
 
 <style scoped>
