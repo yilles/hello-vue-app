@@ -3,18 +3,20 @@ import { ref } from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 
-const videoUrl = ref('http://localhost:5077/video')
-const audioVocalsUrl = ref('http://localhost:5077/audio/vocals')
-const audioOtherUrl = ref('http://localhost:5077/audio/other')
-const audioBassUrl = ref('http://localhost:5077/audio/bass')
-const audioDrumsUrl = ref('http://localhost:5077/audio/drums')
+const videoUrl = ref('/video')
+const audioVocalsUrl = ref('/audio/vocals')
+const audioOtherUrl = ref('/audio/other')
+const audioBassUrl = ref('/audio/bass')
+const audioDrumsUrl = ref('/audio/drums')
 
 const video = ref<HTMLVideoElement | null>(null);
 const vocals = ref<HTMLVideoElement | null>(null);
 const other = ref<HTMLVideoElement | null>(null);
 const bass = ref<HTMLVideoElement | null>(null);
 const drums = ref<HTMLVideoElement | null>(null);
+
 const isMuted = ref(false);
+
 const playAll = () => {
   video.value?.play();
   vocals.value?.play();
@@ -22,6 +24,7 @@ const playAll = () => {
   bass.value?.play();
   drums.value?.play();
 }
+
 const stopAll = () => {
   video.value?.pause();
   vocals.value?.pause();
@@ -29,12 +32,14 @@ const stopAll = () => {
   bass.value?.pause();
   drums.value?.pause();
 }
+
 const mutedVocals = () => {
   isMuted.value = !isMuted.value;
 }
 </script>
 
 <template>
+    <!--
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
@@ -42,6 +47,7 @@ const mutedVocals = () => {
       <HelloWorld msg="You did it!" />
     </div>
   </header>
+    -->
 
   <main>
     <TheWelcome />
@@ -78,21 +84,21 @@ const mutedVocals = () => {
 
   <div>
     <audio ref="other" controls>
-      <source :src="audioVocalsUrl" type="audio/flac">
+      <source :src="audioOtherUrl" type="audio/flac">
       Your browser does not support the audio element.
     </audio>
   </div>
 
   <div>
     <audio ref="bass" controls>
-      <source :src="audioVocalsUrl" type="audio/flac">
+      <source :src="audioBassUrl" type="audio/flac">
       Your browser does not support the audio element.
     </audio>
   </div>
 
   <div>
     <audio ref="drums" controls>
-      <source :src="audioVocalsUrl" type="audio/flac">
+      <source :src="audioDrumsUrl" type="audio/flac">
       Your browser does not support the audio element.
     </audio>
   </div>
